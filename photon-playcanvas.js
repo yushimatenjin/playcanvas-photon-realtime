@@ -9,7 +9,7 @@ class PhotonPlayCanvas extends pc.ScriptType {
         wss: this.wss ? 1 : 0
       }
   
-      // Photonのセットアップを刷る
+      // Photonのセットアップ
       this.app.photon = new LoadBalancing(options)
   
       // Connect to Photon Server
