@@ -84,6 +84,17 @@ class PhotonPlaycanvasConnect extends pc.ScriptType {
 
             entity.setPosition(x, y + this.yOffset, z)
         })
+
+        this.app.on("sync:command", ({ content, actorNr }) => {
+            const entity = this.app.root.findByName(`player_${actorNr}`)
+            if (!entity) return
+
+            /*
+            // 例: アニメーションを再生
+            const { name } = content
+            entity.animation.play(name);
+            */
+        })
     }
 }
 

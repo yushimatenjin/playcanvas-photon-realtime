@@ -35,6 +35,7 @@ class LoadBalancing extends Photon.LoadBalancing.LoadBalancingClient {
     }
 
     if (code === 2) {
+      this.app.fire("sync:command", payload)
     }
 
   }
