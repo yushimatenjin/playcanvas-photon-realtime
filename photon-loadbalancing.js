@@ -1,8 +1,8 @@
 class LoadBalancing extends Photon.LoadBalancing.LoadBalancingClient {
-  constructor (props) {
+  constructor(props) {
     // Photon Settings
     const wss = props.wss
-    const appId = props.appId
+    const appId = props.appId;
     const appVersion = props.appVersion
     super(wss, appId, appVersion)
     // pc.Application
@@ -11,38 +11,41 @@ class LoadBalancing extends Photon.LoadBalancing.LoadBalancingClient {
     this.setLogLevel(4)
   }
 
-  onStateChange (state) {
-    if (state === 5) {
-    }
+  onStateChange(state) {
+    if (state === 5) { }
   }
-  onLobbyStats (state) {}
+  onLobbyStats(state) { }
 
-  onRoomList (e) {
-    this.app.fire('lobby:join')
-  }
-
-  onJoinRoom (e) {
-    this.app.fire('room:join')
+  onRoomList(e) {
+    this.app.fire("lobby:join");
   }
 
-  onEvent (code, content, actorNr) {
+  onJoinRoom(e) {
+    this.app.fire("room:join")
+  }
+
+  onEvent(code, content, actorNr) {
     const payload = { code, content, actorNr }
     if (code === 0) {
-      this.app.fire('sync:position', payload)
+      this.app.fire("sync:position", payload)
       return
     }
     if (code === 1) {
-      this.app.fire('sync:rotation', payload)
+      this.app.fire("sync:rotation", payload)
     }
+
+    if (code === 2) {
+    }
+
   }
 
-  onActorJoin (e) {
+  onActorJoin(e) {
     const payload = Object.assign({}, this.myRoomActors())
-    this.app.fire('sync:players', payload)
+    this.app.fire("sync:players", payload)
   }
 
-  onActorLeave (e) {
+  onActorLeave(e) {
     const payload = Object.assign({}, this.myRoomActors())
-    this.app.fire('sync:players', payload)
+    this.app.fire("sync:players", payload)
   }
 }
